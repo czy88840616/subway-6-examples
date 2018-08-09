@@ -11,8 +11,11 @@ class HostService {
     this.db = await readyData.ready();
   }
 
-  async getHosts(appName) {
-    return this.db.all('select * from host where app_name = ?', appName);
+  async getHosts(appName, scope) {
+    return this.db.all(
+      'select * from host where app_name = ? and scope = ?', 
+      appName, 
+      scope);
   }
 
   async stop() {
