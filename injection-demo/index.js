@@ -1,11 +1,13 @@
 'use strict';
 
+const readyData = require('./readyData');
 const HostService = require('./lib/hostService');
 
 (async () => {
-  const hostService = new HostService();
+  const db = await readyData.ready();
+  const hostService = new HostService(db);
   await hostService.init();
-  const hosts = await hostService.getHosts('testApp', 'taobao');
-  console.log(hosts);
+  const notifySuccessList = await hostService.notifyOwnerWhenSuccess('testApp', 'alipay');
+  console.log(notifySuccessList);
   await hostService.stop();
 })();

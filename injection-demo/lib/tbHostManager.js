@@ -3,6 +3,10 @@ class TbHostManager {
     return this.request();
   }
 
+  async getHostsByStatus(status) {
+    return this.request();
+  }
+
   async request() {
     return new Promise((resolve) => {
       resolve([
