@@ -1,10 +1,12 @@
 'use strict';
 
 const readyData = require('../readyData');
+const TbHostManager = require('./tbHostManager');
 
 class HostService {
 
   constructor() {
+    this.tbHostManager = new TbHostManager();
   }
 
   async init() {
@@ -12,6 +14,11 @@ class HostService {
   }
 
   async getHosts(appName, scope) {
+
+    if(scope === 'taobao') {
+      return await this.tbHostManager.getHost();
+    }
+
     return this.db.all(
       'select * from host where app_name = ? and scope = ?', 
       appName, 
