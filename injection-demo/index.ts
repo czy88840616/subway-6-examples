@@ -1,5 +1,3 @@
-'use strict';
-
 import {ready} from './readyData';
 import {HostService} from './lib/hostService';
 import {Container} from 'injection';
@@ -15,7 +13,7 @@ import { AliyunHostManager} from './lib/manager/aliyunHostManager';
   // 可以绑定函数
   container.bind('db', ready);
   // 可以指定 id
-  container.bind('hostServiceTest', HostService);
+  container.bind('hostService', HostService);
   // 可以直接绑定类
   container.bind(AppService);
   container.bind(RecordService);
@@ -25,7 +23,7 @@ import { AliyunHostManager} from './lib/manager/aliyunHostManager';
   container.bind(AliyunHostManager);
 
   // 真正的调用，通过id获取，也可以通过类名获取
-  const hostService: HostService = await container.getAsync<HostService>('hostServiceTest');
+  const hostService: HostService = await container.getAsync<HostService>('hostService');
 
   await hostService.init();
   const notifySuccessList = await hostService.notifyOwnerWhenSuccess('testApp', 'alipay');
