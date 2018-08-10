@@ -1,42 +1,30 @@
-import {TbHostManager} from './tbHostManager';
+import {TbHostManager} from './manager/tbHostManager';
 import {AppService} from './appService';
 import {RecordService} from './recordService';
+import { HostManagerFactory } from './hostManagerFactory';
 
 export class HostService {
 
   db;
   appService;
   recordService;
-  tbHostManager;
+  hostManager;
+  hostManagerFactory;
 
   constructor(db) {
     this.db = db;
+    this.hostManagerFactory = new HostManagerFactory(db);
     this.appService = new AppService(db);
     this.recordService = new RecordService(db);
-    this.tbHostManager = new TbHostManager();
+    this.hostManager = new TbHostManager(db);
   }
 
   async init() {
     
   }
 
-  async getHosts(appName, scope) {
-
-    if(scope === 'taobao') {
-      return await this.tbHostManager.getHosts();
-    }
-
-    const results = await this.db.all(
-      'select * from host where app_name = ? and scope = ?', 
-      appName, 
-      scope,
-    );
-    
-    let hosts = [];
-    for(let re of results) {
-      hosts.push(re.ip);
-    }
-    return hosts;
+  async getHosts(appName, scope): Promise<Array<string>> {
+    return this.hostManagerFactory.get(scope).getHosts(appName);
   }
 
   async notifyOwnerWhenSuccess(appName, scope) {
