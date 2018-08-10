@@ -1,13 +1,13 @@
 import {HostManager} from '../../interface';
+import {provide, inject} from 'injection';
 
+@provide()
 export class AlipayHostManager implements HostManager {
 
   name = 'alipay';
-  db;
 
-  constructor(db) {
-    this.db = db;
-  }
+  @inject()
+  db;
 
   async getHosts(appName) {
     const results = await this.db.all(

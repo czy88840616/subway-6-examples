@@ -1,10 +1,10 @@
+import {provide, inject} from 'injection';
+
+@provide()
 export class AppService {
 
+  @inject()
   db;
-
-  constructor(db) {
-    this.db = db;
-  }
 
   getOwner(appName, scope) {
     return this.db.all(

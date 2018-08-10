@@ -1,10 +1,11 @@
+import {provide, inject} from 'injection';
+
+
+@provide()
 export class RecordService {
 
+  @inject()
   db;
-  
-  constructor(db) {
-    this.db = db;
-  }
 
   getHostStatus(ip) {
     return this.db.get(

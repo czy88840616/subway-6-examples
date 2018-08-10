@@ -1,24 +1,21 @@
-import {TbHostManager} from './manager/tbHostManager';
 import {AppService} from './appService';
 import {RecordService} from './recordService';
 import { HostManagerFactory } from './hostManagerFactory';
+import {provide, inject, init} from 'injection';
 
+@provide()
 export class HostService {
 
+  @inject()
   db;
-  appService;
-  recordService;
-  hostManager;
-  hostManagerFactory;
+  @inject()
+  appService: AppService;
+  @inject()
+  recordService: RecordService;
+  @inject()
+  hostManagerFactory: HostManagerFactory;
 
-  constructor(db) {
-    this.db = db;
-    this.hostManagerFactory = new HostManagerFactory(db);
-    this.appService = new AppService(db);
-    this.recordService = new RecordService(db);
-    this.hostManager = new TbHostManager(db);
-  }
-
+  @init()
   async init() {
     
   }

@@ -1,13 +1,13 @@
 import {HostManager} from '../../interface';
+import {provide, inject} from 'injection';
 
+@provide()
 export class TbHostManager implements HostManager {
 
   name = 'taobao';
+  
+  @inject()
   db;
-
-  constructor(db) {
-    this.db = db;
-  }
 
   async getHosts(appName): Promise<Array<string>> {
     return this.request();

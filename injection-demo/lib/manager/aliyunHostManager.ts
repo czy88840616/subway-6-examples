@@ -1,14 +1,13 @@
 import {HostManager} from '../../interface';
+import {provide, inject} from 'injection';
 
+@provide()
 export class AliyunHostManager implements HostManager {
 
   name = 'aliyun';
 
+  @inject()
   db;
-
-  constructor(db) {
-    this.db = db;
-  }
 
   async getHosts(appName) {
     return this.request();

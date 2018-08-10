@@ -2,27 +2,30 @@ import {TbHostManager} from './manager/tbHostManager';
 import {AlipayHostManager} from './manager/alipayHostManager';
 import {AliyunHostManager} from './manager/aliyunHostManager';
 import { HostManager } from '../interface';
+import {provide, inject} from 'injection';
 
+@provide()
 export class HostManagerFactory {
 
-  db;
-  
-  constructor(db) {
-    this.db = db;
-  }
+  @inject()
+  tbHostManager: TbHostManager;
+  @inject()
+  alipayHostManager: AlipayHostManager;
+  @inject()
+  aliyunHostManager: AliyunHostManager
 
   get(scope: string): HostManager {
 
     if(scope === 'taobao') {
-      return new TbHostManager(this.db);
+      return this.tbHostManager;
     }
 
     if(scope === 'alipay') {
-      return new AlipayHostManager(this.db);
+      return this.alipayHostManager;
     }
 
     if(scope === 'aliyun') {
-      return new AliyunHostManager(this.db);
+      return this.aliyunHostManager;
     }
   }
 }
