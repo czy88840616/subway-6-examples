@@ -2,7 +2,7 @@
 
 import sqlite = require('sqlite');
 
-export async function ready () {
+export async function ready (context) {
   let db = await sqlite.open(':memory:');
   // 主机记录
   await db.run('CREATE TABLE host(app_name text, ip text, scope text)');
