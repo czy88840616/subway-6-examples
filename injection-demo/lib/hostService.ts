@@ -1,10 +1,13 @@
-'use strict';
+import {TbHostManager} from './tbHostManager';
+import {AppService} from './appService';
+import {RecordService} from './recordService';
 
-const TbHostManager = require('./tbHostManager');
-const AppService = require('./appService');
-const RecordService = require('./recordService');
+export class HostService {
 
-class HostService {
+  db;
+  appService;
+  recordService;
+  tbHostManager;
 
   constructor(db) {
     this.db = db;
@@ -38,7 +41,7 @@ class HostService {
 
   async notifyOwnerWhenSuccess(appName, scope) {
     
-    let hosts = await this.getHosts(appName, scope, 'success');
+    let hosts = await this.getHosts(appName, scope);
 
     let notifySuccessList = [];
     for(let host of hosts) {
@@ -64,5 +67,3 @@ class HostService {
   }
  
 }
-
-module.exports = HostService;

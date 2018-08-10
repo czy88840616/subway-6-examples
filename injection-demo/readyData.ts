@@ -1,8 +1,8 @@
 'use strict';
 
-const sqlite = require('sqlite');
+import sqlite = require('sqlite');
 
-async function ready () {
+export async function ready () {
   let db = await sqlite.open(':memory:');
   // 主机记录
   await db.run('CREATE TABLE host(app_name text, ip text, scope text)');
@@ -21,5 +21,3 @@ async function ready () {
   await db.run('insert into app values ("testApp", "alipay", "zhangting")');
   return db;
 }
-
-exports.ready = ready;

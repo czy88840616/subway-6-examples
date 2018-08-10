@@ -1,4 +1,7 @@
-class RecordService {
+export class RecordService {
+
+  db;
+  
   constructor(db) {
     this.db = db;
   }
@@ -10,5 +13,3 @@ class RecordService {
     );
   }
 }
-
-module.exports = RecordService;

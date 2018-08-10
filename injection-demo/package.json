@@ -4,11 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "./node_modules/.bin/ts-node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "sqlite": "^2.9.2"
+  },
+  "devDependencies": {
+    "ts-node": "^7.0.0",
+    "typescript": "^3.0.1"
   }
 }

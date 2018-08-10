@@ -1,4 +1,7 @@
-class AppService {
+export class AppService {
+
+  db;
+
   constructor(db) {
     this.db = db;
   }
@@ -11,5 +14,3 @@ class AppService {
     );
   }
 }
-
-module.exports = AppService;

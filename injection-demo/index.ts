@@ -1,7 +1,7 @@
 'use strict';
 
-const readyData = require('./readyData');
-const HostService = require('./lib/hostService');
+import readyData = require('./readyData');
+import {HostService} from './lib/hostService';
 
 (async () => {
   const db = await readyData.ready();
